@@ -1,4 +1,4 @@
-package Main;
+package DataType.Position;
 
 import java.util.Optional;
 

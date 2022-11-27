@@ -1,9 +1,9 @@
-package Main;
+package DataType;
 
 public class Card {
 
 
-    CardType tyoe;
+    CardType type;
     int value;
 
 }

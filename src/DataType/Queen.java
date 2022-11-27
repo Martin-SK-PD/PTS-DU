@@ -1,4 +1,4 @@
-package Main;
+package DataType;
 
 public class Queen {
 

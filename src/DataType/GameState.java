@@ -1,4 +1,8 @@
-package Main;
+package DataType;
+
+import DataType.Position.AwokenQueenPosition;
+import DataType.Position.HandPosition;
+import DataType.Position.SleepingQueenPosition;
 
 import java.util.List;
 import java.util.Map;

@@ -1,10 +1,10 @@
-package Main;
+package DataType.Position;
 
-public class HandPosition {
+public class AwokenQueenPosition{
+
 
     int cardIndex;
     int playerIndex;
-
 
     public int getCardIndex() {
         return cardIndex;

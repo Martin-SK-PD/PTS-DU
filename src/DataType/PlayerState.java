@@ -1,4 +1,4 @@
-package Main;
+package DataType;
 
 import java.util.Map;
 import java.util.Optional;

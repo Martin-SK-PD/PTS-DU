@@ -1,4 +1,4 @@
-package Main;
+package DataType.Position;
 
 public class SleepingQueenPosition{
 
