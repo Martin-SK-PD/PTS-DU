@@ -1,14 +1,10 @@
 package DataType;
 
-public class CardType {
-
-
-    enum CardTyp {
-        Number,
-        King,
-        Knight,
-        SleepingPotion,
-        Dragon,
-        MagicWand
-    }
+public enum CardType {
+    Number,
+    King,
+    Knight,
+    SleepingPotion,
+    Dragon,
+    MagicWand
 }

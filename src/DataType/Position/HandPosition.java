@@ -2,12 +2,13 @@ package DataType.Position;
 
 public class HandPosition {
 
-    int cardIndex;
-    int playerIndex;
+    private int cardIndex;
+    private int playerIndex;
 
-
-
-
+    public HandPosition(int cardIndex, int playerIndex){
+        this.playerIndex = playerIndex;
+        this.cardIndex = cardIndex;
+    }
 
     public int getCardIndex() {
         return cardIndex;

@@ -5,6 +5,6 @@ import java.util.Optional;
 
 public class PlayerState {
 
-    Map<Integer, Optional<Card>> cards;
-    Map<Integer, Queen> awokenQueens;
+    public Map<Integer, Optional<Card>> cards;
+    public Map<Integer, Queen> awokenQueens;
 }

@@ -3,7 +3,12 @@ package DataType.Position;
 public class SleepingQueenPosition{
 
 
-    int cardIndex;
+    private int cardIndex;
+
+
+    public SleepingQueenPosition(int cardIndex){
+        this.cardIndex = cardIndex;
+    }
 
     public int getCardIndex() {
         return cardIndex;

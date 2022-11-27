@@ -4,11 +4,10 @@ import java.util.Optional;
 
 public class Position {
 
-    // troma konstruktormi, a troma gettermi
+
     private Optional<HandPosition> handPosition;
     private Optional<SleepingQueenPosition> sleepingQueenPosition;
     private Optional<AwokenQueenPosition> awokenQueenPosition;
-
 
 
     public Position(HandPosition handPosition){

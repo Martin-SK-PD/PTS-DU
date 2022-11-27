@@ -3,8 +3,14 @@ package DataType.Position;
 public class AwokenQueenPosition{
 
 
-    int cardIndex;
-    int playerIndex;
+    private int cardIndex;
+    private int playerIndex;
+
+    public AwokenQueenPosition(int cardIndex, int playerIndex){
+        this.cardIndex = cardIndex;
+        this.playerIndex = playerIndex;
+    }
+
 
     public int getCardIndex() {
         return cardIndex;
