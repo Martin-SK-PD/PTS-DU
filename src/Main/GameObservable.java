@@ -42,8 +42,12 @@ public class GameObservable {
 
     void notifyAll(GameState message){
 
+        String s ="";
+        s+= "\n";
         for (GameObserver gameObserver : gameObservers) {
-            gameObserver.notify(String.valueOf(message));
+
+
+            gameObserver.notify(s);
         }
 
     }
