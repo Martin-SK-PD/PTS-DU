@@ -7,14 +7,12 @@ import java.util.List;
 
 public class GameObservable {
 
-
     private List<GameObserver> gameObservers;
-    private List<Integer> players;
     private List<String> playersName;
 
     public GameObservable(){
         gameObservers = new ArrayList<>();
-        players = new ArrayList<>();
+        playersName = new ArrayList<>();
     }
 
     public void add(GameObserver observer){
@@ -23,9 +21,8 @@ public class GameObservable {
 
 
 
-    public void addPlayer(int playerIdx,String name, GameObserver observer){
-        if(players.size()<5){
-            players.add(playerIdx);
+    public void addPlayer(String name, GameObserver observer){
+        if(playersName.size()<5 && !playersName.contains(name)){
             playersName.add(name);
             gameObservers.add(observer);
         }
@@ -51,9 +48,6 @@ public class GameObservable {
     }
 
 
-    public List<Integer> getPlayers() {
-        return players;
-    }
 
     public List<String> getPlayersName() {
         return playersName;

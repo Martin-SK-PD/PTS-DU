@@ -1,11 +1,13 @@
 package Main;
 
 import DataType.Card;
+import DataType.CardType;
 import EmptyDeck.EmptyDeckHandler;
 import EmptyDeck.FirstType;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DrawingAndTrashPile {
@@ -15,7 +17,42 @@ public class DrawingAndTrashPile {
     private List<Card> discardedThisTurn;
     private EmptyDeckHandler emptyDeckHandler;
 
+    public DrawingAndTrashPile(){
+        discardedThisTurn = new ArrayList<>();
+        trashPile = new ArrayList<>();
+        drawingPile = new ArrayList<>();
 
+
+        for (int i = 0; i < 8; i++){
+            drawingPile.add(new Card(CardType.King,0));
+        }
+
+        for (int i = 0; i < 4; i++){
+            drawingPile.add(new Card(CardType.Knight,0));
+        }
+
+        for (int i = 0; i < 4; i++){
+            drawingPile.add(new Card(CardType.SleepingPotion,0));
+        }
+
+        for (int i = 0; i < 3; i++){
+            drawingPile.add(new Card(CardType.MagicWand,0));
+        }
+
+        for (int i = 0; i < 3; i++){
+            drawingPile.add(new Card(CardType.Dragon,0));
+        }
+
+        for(int i = 0; i < 4 ; i++){
+            for (int j = 1; j <= 10; j++){
+                drawingPile.add(new Card(CardType.Number,j));
+            }
+        }
+
+        Collections.shuffle(drawingPile);
+
+
+    }
 
     public List<Card> discardAndDraw(List<Card> discard){
 

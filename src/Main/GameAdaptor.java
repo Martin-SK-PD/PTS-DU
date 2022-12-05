@@ -18,12 +18,12 @@ public class GameAdaptor implements GamePlayerInterface{
     private Map<String, Integer> players ;
 
     private GameAdaptor(GameObservable gameObservable){
-        game = new Game();
-        this.gameObservable = gameObservable;
-        for(int i = 0; i < gameObservable.getPlayers().size(); i++){
-            players.put(gameObservable.getPlayersName().get(0), gameObservable.getPlayers().get(1));
-        }
 
+        this.gameObservable = gameObservable;
+        for(int i = 0; i < gameObservable.getPlayersName().size(); i++){
+            players.put( gameObservable.getPlayersName().get(i) , i);
+        }
+        game = new Game(players);
     }
 
 

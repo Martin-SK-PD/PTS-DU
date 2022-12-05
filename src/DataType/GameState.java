@@ -18,4 +18,14 @@ public class GameState {
     public Map<AwokenQueenPosition, Queen> awokenQueens;
     public List<Card> cardsDiscartedLastTurn;
 
+
+    @Override
+    public String toString(){
+        String s = "";
+        s+= "on turn: "+ onTurn+"\n";
+        s+= "cardsDiscartedLastTurn: "+ cardsDiscartedLastTurn.toString()+"\n";
+        s+= "sleepingQueens: "+ sleepingQueens.toString()+"\n";
+        s+= "awokenQueens: "+awokenQueens.toString()+"\n";
+        return s;
+    }
 }
