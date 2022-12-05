@@ -13,6 +13,7 @@ public class Game {
     private GameState gameState;
     private DrawingAndTrashPile drawingAndTrashPile;
     private ArrayList<Player> players;
+    private SleepingQueens sleepingQueens;
 
     public Game(){
         players = new ArrayList<>();

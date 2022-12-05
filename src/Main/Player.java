@@ -1,5 +1,6 @@
 package Main;
 
+import DataType.GameState;
 import DataType.PlayerState;
 import DataType.Position.Position;
 
@@ -11,15 +12,20 @@ public class Player {
     private Hand hand;
     private final int playerId;
     private DrawingAndTrashPile drawingAndTrashPile;
+    private GameState gameState;
+    private AwokenQueens awokenQueens;
 
-    public Player(int playerId, DrawingAndTrashPile drawingAndTrashPile){
+    public Player(int playerId, DrawingAndTrashPile drawingAndTrashPile, GameState gameState){
         playerState = new PlayerState();
+        awokenQueens = new AwokenQueens();
         this.playerId = playerId;
         this.drawingAndTrashPile = drawingAndTrashPile;
-        hand = new Hand(playerId, drawingAndTrashPile);
+        this.gameState = gameState;
+        hand = new Hand(playerId, drawingAndTrashPile, gameState);
     }
 
     public void play(List<Position> cards){
+
 
     }
 

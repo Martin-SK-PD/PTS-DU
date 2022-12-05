@@ -17,15 +17,23 @@ public class GameAdaptor implements GamePlayerInterface{
     private GameObservable gameObservable;
     private Map<String, Integer> players ;
 
-    private GameAdaptor(){
+    private GameAdaptor(GameObservable gameObservable){
         game = new Game();
-        gameObservable = new GameObservable();
+        this.gameObservable = gameObservable;
+        for(int i = 0; i < gameObservable.getPlayers().size(); i++){
+            players.put(gameObservable.getPlayersName().get(0), gameObservable.getPlayers().get(1));
+        }
+
     }
 
 
 
     @Override
     public String play(String player, String cards) {
+
+        if(players.size() < 2 ){
+            return "lack of players";
+        }
 
         int index;
         try {
@@ -49,15 +57,14 @@ public class GameAdaptor implements GamePlayerInterface{
             try {
                 switch (first) {
                     case 'h':
-                        for (Integer integer : arrayList) {
-                            card.add(new Position(new HandPosition(integer, index)));
-                        }
+                        card.add(new Position(new HandPosition(arrayList.get(0), index)));
                         break;
                     case 'a':
                         card.add(new Position(new AwokenQueenPosition(arrayList.get(1), arrayList.get(0))));
                         break;
                     case 's':
-                        card.add(new Position(new SleepingQueenPosition(arrayList.get(0))));
+                        s = s.substring(1);
+                        card.add(new Position(new SleepingQueenPosition(Integer.parseInt(s))));
                         break;
                 }
             }
@@ -70,7 +77,5 @@ public class GameAdaptor implements GamePlayerInterface{
 
         return game.play(index,card).toString();
     }
-
-
 
 }

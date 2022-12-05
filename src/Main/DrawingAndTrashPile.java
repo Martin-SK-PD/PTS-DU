@@ -15,11 +15,15 @@ public class DrawingAndTrashPile {
     private List<Card> discardedThisTurn;
     private EmptyDeckHandler emptyDeckHandler;
 
+
+
     public List<Card> discardAndDraw(List<Card> discard){
 
         List<Card> ret = new ArrayList<>();
         discardedThisTurn = discard;
         int count = discard.size();
+
+
         if(count <= drawingPile.size()){
 
             for(int i = 0; i <count; i++) {
@@ -42,6 +46,7 @@ public class DrawingAndTrashPile {
     }
 
     public void newTurn(){
+        discardedThisTurn.clear();
     }
 
     public List<Card> getCardsDiscardedThisTurn(){

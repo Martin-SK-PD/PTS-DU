@@ -10,27 +10,29 @@ public class GameObservable {
 
     private List<GameObserver> gameObservers;
     private List<Integer> players;
+    private List<String> playersName;
 
     public GameObservable(){
         gameObservers = new ArrayList<>();
         players = new ArrayList<>();
     }
 
-    void add(GameObserver observer){
+    public void add(GameObserver observer){
         gameObservers.add(observer);
     }
 
 
 
-    void addPlayer(int playerIdx, GameObserver observer){
+    public void addPlayer(int playerIdx,String name, GameObserver observer){
         if(players.size()<5){
             players.add(playerIdx);
+            playersName.add(name);
             gameObservers.add(observer);
         }
     }
 
 
-    void remove(GameObserver observer){
+    public void remove(GameObserver observer){
         try {
             gameObservers.remove(observer);
         }
@@ -40,16 +42,20 @@ public class GameObservable {
     }
 
 
-    void notifyAll(GameState message){
+    public void notifyAll(GameState message){
 
-        String s ="";
-        s+= "\n";
         for (GameObserver gameObserver : gameObservers) {
-
-
-            gameObserver.notify(s);
+            gameObserver.notify(message.toString());
         }
 
     }
 
+
+    public List<Integer> getPlayers() {
+        return players;
+    }
+
+    public List<String> getPlayersName() {
+        return playersName;
+    }
 }
