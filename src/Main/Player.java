@@ -23,7 +23,7 @@ public class Player {
         this.game = game;
 
         playerState = new PlayerState();
-        awokenQueens = new AwokenQueens();
+        awokenQueens = new AwokenQueens(playerId);
 
 
 
@@ -33,7 +33,7 @@ public class Player {
         playerState.setAwokenQueens(new HashMap<>());
         Map<Integer, Optional<Card>> map = new HashMap<>();
         for (int i = 0; i < hand.getCards().size();i++){
-            map.put(i+1,Optional.of(hand.getCards().get(i)));
+            map.put(i,Optional.of(hand.getCards().get(i)));
         }
         playerState.setCards(map);
     }
@@ -56,5 +56,13 @@ public class Player {
 
     public int getPlayerId() {
         return playerId;
+    }
+
+    public AwokenQueens getAwokenQueens() {
+        return awokenQueens;
+    }
+
+    public Hand getHand() {
+        return hand;
     }
 }

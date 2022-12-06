@@ -37,7 +37,7 @@ public class Hand {
         Map<HandPosition, Card> ret = new HashMap<>();
         List<Card> drawnCards = player.getGame().getDrawingAndTrashPile().discardAndDraw(pickedCards);
         for (int i = 0; i < drawnCards.size(); i++) {
-            ret.put(new HandPosition(i + cards.size() +1, player.getPlayerId()), drawnCards.get(i));
+            ret.put(new HandPosition(i + cards.size() , player.getPlayerId()), drawnCards.get(i));
         }
         cards.addAll(drawnCards);
 
@@ -52,7 +52,7 @@ public class Hand {
     public HandPosition hasCardOfType(CardType type){
         for(int i = 0; i < cards.size(); i++){
             if(cards.get(i).getType() == type){
-                return new HandPosition(i+1,player.getPlayerId());
+                return new HandPosition(i,player.getPlayerId());
             }
         }
         return null;
