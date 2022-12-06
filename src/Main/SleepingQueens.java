@@ -10,10 +10,11 @@ public class SleepingQueens extends QueenCollection{
 
 
     private Map<Position, Queen> sleepingQueens;
+    private List<Integer> emptySpaces;
 
     public SleepingQueens(){
         sleepingQueens = new HashMap<>();
-
+        emptySpaces = new ArrayList<>();
 
         List<Integer> points = new ArrayList<>();
         for (int i = 0; i < 4; i++ ) {
@@ -36,7 +37,14 @@ public class SleepingQueens extends QueenCollection{
 
     @Override
     public void addQueen(Queen queen){
-        sleepingQueens.put(new SleepingQueenPosition(sleepingQueens.size()),queen);
+        if(emptySpaces.isEmpty()){
+            sleepingQueens.put(new SleepingQueenPosition(sleepingQueens.size()),queen);
+        }
+        else {
+            sleepingQueens.put(new SleepingQueenPosition(emptySpaces.get(0) ),queen );
+            emptySpaces.remove(0);
+        }
+
     }
 
 
@@ -44,8 +52,12 @@ public class SleepingQueens extends QueenCollection{
     public Optional<Queen> removeQueen(Position position){
         Optional<Queen> queen;
         queen = Optional.of(sleepingQueens.remove(position));
+        if(queen.isPresent()){
+            emptySpaces.add(position.getCardIndex());
+        }
+
         return queen;
-    }
+   }
 
 
     @Override

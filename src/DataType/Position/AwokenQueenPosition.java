@@ -16,6 +16,10 @@ public class AwokenQueenPosition implements Position{
         return cardIndex;
     }
 
+    public void setCardIndex(int index){
+        cardIndex = index;
+    }
+
     public int getPlayerIndex() {
         return playerIndex;
     }

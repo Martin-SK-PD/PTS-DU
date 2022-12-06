@@ -10,6 +10,10 @@ public class SleepingQueenPosition implements  Position{
         this.cardIndex = cardIndex;
     }
 
+    public void setCardIndex(int index){
+        cardIndex = index;
+    }
+
     @Override
     public int getCardIndex() {
         return cardIndex;
