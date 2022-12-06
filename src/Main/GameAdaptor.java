@@ -23,7 +23,7 @@ public class GameAdaptor implements GamePlayerInterface{
         for(int i = 0; i < gameObservable.getPlayersName().size(); i++){
             players.put( gameObservable.getPlayersName().get(i) , i);
         }
-        game = new Game(players);
+        game = new Game(players.size());
     }
 
 
@@ -57,14 +57,14 @@ public class GameAdaptor implements GamePlayerInterface{
             try {
                 switch (first) {
                     case 'h':
-                        card.add(new Position(new HandPosition(arrayList.get(0), index)));
+                        card.add(new HandPosition(arrayList.get(0), index));
                         break;
                     case 'a':
-                        card.add(new Position(new AwokenQueenPosition(arrayList.get(1), arrayList.get(0))));
+                        card.add(new AwokenQueenPosition(arrayList.get(1), arrayList.get(0)));
                         break;
                     case 's':
                         s = s.substring(1);
-                        card.add(new Position(new SleepingQueenPosition(Integer.parseInt(s))));
+                        card.add(new SleepingQueenPosition(Integer.parseInt(s)));
                         break;
                 }
             }

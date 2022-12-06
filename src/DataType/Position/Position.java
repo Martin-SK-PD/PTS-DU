@@ -2,9 +2,11 @@ package DataType.Position;
 
 import java.util.Optional;
 
-public class Position {
+public interface Position {
+    
+    int getCardIndex();
 
-
+    /*
     private Optional<HandPosition> handPosition;
     private Optional<SleepingQueenPosition> sleepingQueenPosition;
     private Optional<AwokenQueenPosition> awokenQueenPosition;
@@ -35,4 +37,6 @@ public class Position {
     public Optional<AwokenQueenPosition> getAwokenQueenPosition() {
         return awokenQueenPosition;
     }
+    */
+
 }

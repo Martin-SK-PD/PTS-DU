@@ -1,6 +1,6 @@
 package DataType.Position;
 
-public class HandPosition {
+public class HandPosition implements Position {
 
     private int cardIndex;
     private int playerIndex;
@@ -10,6 +10,7 @@ public class HandPosition {
         this.cardIndex = cardIndex;
     }
 
+    @Override
     public int getCardIndex() {
         return cardIndex;
     }
