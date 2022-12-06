@@ -25,7 +25,7 @@ public class Game {
         gameState = new GameState();
         drawingAndTrashPile = new DrawingAndTrashPile();
         sleepingQueens = new SleepingQueens();
-        gameFinished = new GameFinished();
+
 
 
         gameState.numberOfPlayers = numberOfPlayers;
@@ -33,6 +33,7 @@ public class Game {
         gameState.cardsDiscartedLastTurn = new ArrayList<>();
 
         update();
+        gameFinished = new GameFinished(this);
     }
 
 
