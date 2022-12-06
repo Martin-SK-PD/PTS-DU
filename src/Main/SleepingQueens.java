@@ -10,7 +10,7 @@ import java.util.Optional;
 public class SleepingQueens extends QueenCollection{
 
 
-    private Map<Position, Queen> queens;
+    private Map<Position, Queen> sleepingQueens;
 
 
     @Override
@@ -26,6 +26,6 @@ public class SleepingQueens extends QueenCollection{
 
     @Override
     public Map<Position, Queen> getQueens(){
-        return queens;
+        return sleepingQueens;
     }
 }

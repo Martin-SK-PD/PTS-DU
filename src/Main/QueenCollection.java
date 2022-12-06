@@ -10,20 +10,10 @@ import java.util.Optional;
  abstract class QueenCollection {
 
 
-    private Map<Position, Queen> queens;
+    abstract void addQueen(Queen queen);
 
+    abstract Optional<Queen> removeQueen(SleepingQueenPosition position);
 
+    abstract Map<Position, Queen> getQueens();
 
-    public void addQueen(Queen queen){
-
-    }
-
-    public Optional<Queen> removeQueen(SleepingQueenPosition position){
-        return Optional.empty();
-    }
-
-
-    public Map<Position, Queen> getQueens(){
-        return queens;
-    }
 }
