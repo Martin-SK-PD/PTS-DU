@@ -27,26 +27,12 @@ public class Game {
         sleepingQueens = new SleepingQueens();
         gameFinished = new GameFinished();
 
-        gameState.awokenQueens = new HashMap<>();
+
         gameState.numberOfPlayers = numberOfPlayers;
         gameState.onTurn = (int)(Math.random()*(gameState.numberOfPlayers-1) );
         gameState.cardsDiscartedLastTurn = new ArrayList<>();
 
-
-        Set<SleepingQueenPosition> set = new HashSet<>();
-        for(Position position : sleepingQueens.getQueens().keySet()){
-            set.add((SleepingQueenPosition) position);
-        }
-        gameState.sleepingQueens = set;
-
-
-        for (int i = 0; i < numberOfPlayers; i++){
-            players.add(new Player(i,this));
-        }
-
-
-
-
+        update();
     }
 
 
@@ -59,6 +45,9 @@ public class Game {
         if(players.get(playerIdx).play(cards)) {
 
             update();
+            gameState.onTurn =  (gameState.onTurn + 1) % gameState.numberOfPlayers;
+            gameState.cardsDiscartedLastTurn = drawingAndTrashPile.getCardsDiscardedThisTurn();
+
             drawingAndTrashPile.newTurn();
             Optional<Integer> winner = gameFinished.isFinished();
             if (winner.isPresent()) {
@@ -74,14 +63,15 @@ public class Game {
         return drawingAndTrashPile;
     }
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public SleepingQueens getSleepingQueens() {
+        return sleepingQueens;
+    }
 
     private void update(){
-
-
-        gameState.onTurn =  (gameState.onTurn + 1) % gameState.numberOfPlayers;
-        gameState.cardsDiscartedLastTurn = drawingAndTrashPile.getCardsDiscardedThisTurn();
-
-
 
         Set<SleepingQueenPosition> sleepingQueenPositions = new HashSet<>();
         for (Position position : sleepingQueens.getQueens().keySet()) {
