@@ -1,5 +1,6 @@
 package Main;
 
+import DataType.Position.AwokenQueenPosition;
 import DataType.Position.Position;
 import DataType.Position.SleepingQueenPosition;
 import DataType.Queen;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
     abstract void addQueen(Queen queen);
 
-    abstract Optional<Queen> removeQueen(SleepingQueenPosition position);
+    abstract Optional<Queen> removeQueen(Position position);
 
     abstract Map<Position, Queen> getQueens();
 

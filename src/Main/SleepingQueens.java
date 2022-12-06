@@ -39,18 +39,11 @@ public class SleepingQueens extends QueenCollection{
         sleepingQueens.put(new SleepingQueenPosition(sleepingQueens.size()),queen);
     }
 
+
     @Override
-    public Optional<Queen> removeQueen(SleepingQueenPosition position){
-        Optional<Queen> queen = Optional.empty();
-
-
-        for (Position position1 :sleepingQueens.keySet()){
-            if(position1.getCardIndex() == position.getCardIndex()){
-                queen = Optional.of(sleepingQueens.get(position1));
-                sleepingQueens.remove(position1,queen.get());
-                break;
-            }
-        }
+    public Optional<Queen> removeQueen(Position position){
+        Optional<Queen> queen;
+        queen = Optional.of(sleepingQueens.remove(position));
         return queen;
     }
 
