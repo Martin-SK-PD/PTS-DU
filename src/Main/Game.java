@@ -13,6 +13,7 @@ public class Game {
     private DrawingAndTrashPile drawingAndTrashPile;
     private ArrayList<Player> players;
     private SleepingQueens sleepingQueens;
+    private GameFinished gameFinished;
 
 
     public Game(Map<String, Integer> map){
@@ -32,6 +33,11 @@ public class Game {
         gameState.sleepingQueens = set;
 
 
+        for (Integer i : map.values()){
+            players.add(new Player(i,this));
+        }
+
+        gameFinished = new GameFinished();
 
 
     }
@@ -50,5 +56,9 @@ public class Game {
 
 
         return Optional.of(gameState);
+    }
+
+    public DrawingAndTrashPile getDrawingAndTrashPile() {
+        return drawingAndTrashPile;
     }
 }

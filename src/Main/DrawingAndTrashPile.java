@@ -95,4 +95,14 @@ public class DrawingAndTrashPile {
     }
 
 
+    public List<Card> draw5(){
+        List<Card> cards = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            cards.add(drawingPile.get(0));
+            drawingPile.remove(0);
+        }
+        return cards;
+    }
+
+
 }

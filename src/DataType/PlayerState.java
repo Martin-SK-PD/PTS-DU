@@ -20,5 +20,15 @@ public class PlayerState {
         return cards;
     }
 
+    public Map<Integer, Queen> getAwokenQueens() {
+        return awokenQueens;
+    }
 
+    public void setAwokenQueens(Map<Integer, Queen> awokenQueens) {
+        this.awokenQueens = awokenQueens;
+    }
+
+    public void setCards(Map<Integer, Optional<Card>> cards) {
+        this.cards = cards;
+    }
 }

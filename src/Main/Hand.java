@@ -2,58 +2,63 @@ package Main;
 
 import DataType.Card;
 import DataType.CardType;
-import DataType.GameState;
 import DataType.Position.HandPosition;
 
 import java.util.*;
 
 public class Hand {
 
-    private final int playerIndex;
-    private DrawingAndTrashPile drawingAndTrashPile;
-    private GameState gameState;
+    private Player player;
     private List<Card> cards;
+    private List<Card> pickedCards;
 
 
-    public Hand(int playerIndex, DrawingAndTrashPile drawingAndTrashPile, GameState gameState){
-        this.playerIndex = playerIndex;
-        this.drawingAndTrashPile = drawingAndTrashPile;
-        this.gameState = gameState;
+    public Hand(Player player){
+        this.player = player;
+        cards = player.getGame().getDrawingAndTrashPile().draw5();
     }
 
 
     public Optional<List<Card>> pickCards(List<HandPosition> positions){
 
-        cards = new ArrayList<>();
+        if (positions.isEmpty()) return Optional.empty();
         for (HandPosition position : positions) {
-            Optional<Card> card = gameState.cards.get(position);
-            if(card.isPresent()) {
-                cards.add(card.get());
-            }
+            pickedCards.add(cards.get(position.getCardIndex()-1));
         }
-        return Optional.ofNullable(cards);
+        return Optional.ofNullable(pickedCards);
+
     }
 
     public Map<HandPosition, Card> removePickedCardsAndRedraw(){
-        List<Card> cards1 = drawingAndTrashPile.discardAndDraw(cards);
 
-        Map<HandPosition, Card> map = new HashMap<>();
+        cards.removeAll(pickedCards);
 
-        return map;
+
+        Map<HandPosition, Card> ret = new HashMap<>();
+        List<Card> drawnCards = player.getGame().getDrawingAndTrashPile().discardAndDraw(pickedCards);
+        for (int i = 0; i < drawnCards.size(); i++) {
+            ret.put(new HandPosition(i + cards.size() +1, player.getPlayerId()), drawnCards.get(i));
+        }
+        cards.addAll(drawnCards);
+
+        returnPickedCards();
+        return ret;
     }
 
     public void returnPickedCards(){
-        
+        pickedCards.clear();
     }
 
     public HandPosition hasCardOfType(CardType type){
-
-
+        for(int i = 0; i < cards.size(); i++){
+            if(cards.get(i).getType() == type){
+                return new HandPosition(i+1,player.getPlayerId());
+            }
+        }
         return null;
     }
 
     public List<Card> getCards(){
-
         return cards;
     }
 

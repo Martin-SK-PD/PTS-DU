@@ -11,6 +11,12 @@ public class FirstType implements EmptyDeckHandler{
     private List<Card> thisDrawingPile;
     private List<Card> thisTrashPile;
 
+    public FirstType(){
+        thisTrashPile = new ArrayList<>();
+        thisTrashPile = new ArrayList<>();
+    }
+
+
     @Override
     public List<Card> play(List<Card> discard, List<Card> drawingPile, List<Card> trashPile) {
 
