@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class EvaluateNumberedCardsTest {
 
-    private EvaluateNumberedCards evaluateNumberedCards = new EvaluateNumberedCards();
+    private final EvaluateNumberedCards evaluateNumberedCards = new EvaluateNumberedCards();
     private List<Card> list;
 
     private void setUp(){

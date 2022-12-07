@@ -25,7 +25,7 @@ public class Game {
         gameState = new GameState();
         drawingAndTrashPile = new DrawingAndTrashPile();
         sleepingQueens = new SleepingQueens();
-
+        players = new ArrayList<>();
 
 
         for (int i = 0; i < numberOfPlayers; i++){
@@ -93,14 +93,14 @@ public class Game {
 
     private void update(){
 
-        Set<SleepingQueenPosition> sleepingQueenPositions = new HashSet<>();
+        Set<SleepingQueenPosition> sleepingQueenPositions = new LinkedHashSet<>();
         for (Position position : sleepingQueens.getQueens().keySet()) {
             sleepingQueenPositions.add((SleepingQueenPosition) position);
         }
         gameState.sleepingQueens = sleepingQueenPositions;
 
 
-        Map<AwokenQueenPosition, Queen> playersQueens = new HashMap<>();
+        Map<AwokenQueenPosition, Queen> playersQueens = new LinkedHashMap<>();
         for(Player player : players){
             int i=0;
             for (Queen queen: player.getAwokenQueens().getQueens().values()){
@@ -111,7 +111,7 @@ public class Game {
         gameState.awokenQueens = playersQueens;
 
 
-        Map<HandPosition, Optional<Card>> cards = new HashMap<>();
+        Map<HandPosition, Optional<Card>> cards = new LinkedHashMap<>();
         for(Player player: players){
             int i = 0;
             for (Card card:player.getHand().getCards()){

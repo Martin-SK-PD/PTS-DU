@@ -22,7 +22,7 @@ public class GameFinished implements GameFinishedStrategy{
             queenCount = 4;
         }
         else {
-            score = 100;
+            score = 1000;
             queenCount = 20;
         }
     }
@@ -30,7 +30,7 @@ public class GameFinished implements GameFinishedStrategy{
     @Override
     public Optional<Integer> isFinished() {
 
-        Map<Integer,Integer> playersScores = new HashMap<>();
+        Map<Integer,Integer> playersScores = new LinkedHashMap<>();
 
 
 
@@ -42,7 +42,6 @@ public class GameFinished implements GameFinishedStrategy{
                 s+= queen.getPoints();
                 c++;
             }
-
             playersScores.put(id,s);
             if(c >= queenCount || s >= score){
                 return Optional.of(id);

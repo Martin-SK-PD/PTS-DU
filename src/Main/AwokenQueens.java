@@ -35,8 +35,13 @@ public class AwokenQueens extends QueenCollection{
     @Override
     public Optional<Queen> removeQueen(Position position){
 
-        Optional<Queen> queen;
-        queen = Optional.of(awokenQueens.remove(position));
+        Optional<Queen> queen = Optional.empty();
+        for (Position position1 : awokenQueens.keySet()){
+            if(position.getCardIndex() == position1.getCardIndex()){
+                queen = Optional.ofNullable(awokenQueens.remove(position1));
+                break;
+            }
+        }
         if(queen.isPresent()){
             emptySpaces.add(position.getCardIndex());
         }

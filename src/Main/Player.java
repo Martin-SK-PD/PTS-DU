@@ -210,7 +210,7 @@ public class Player {
 
         playerState = new PlayerState();
 
-        Map<Integer, Optional<Card>> cards = new HashMap<>();
+        Map<Integer, Optional<Card>> cards = new LinkedHashMap<>();
 
         List<Card> handCards = hand.getCards();
         for (int i = 0; i < 5; i++) {
@@ -223,7 +223,7 @@ public class Player {
         }
         playerState.setCards(cards);
 
-        Map<Integer, Queen> queens = new HashMap<>();
+        Map<Integer, Queen> queens = new LinkedHashMap<>();
         for(Position position: awokenQueens.getQueens().keySet()){
             queens.put(position.getCardIndex(), awokenQueens.getQueens().get(position));
         }

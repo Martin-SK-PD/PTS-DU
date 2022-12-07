@@ -36,7 +36,7 @@ public class Hand {
         cards.removeAll(pickedCards);
 
 
-        Map<HandPosition, Card> ret = new HashMap<>();
+        Map<HandPosition, Card> ret = new LinkedHashMap<>();
         List<Card> drawnCards = drawingAndTrashPile.discardAndDraw(pickedCards);
         for (int i = 0; i < drawnCards.size(); i++) {
             ret.put(new HandPosition(i + cards.size() , playerId), drawnCards.get(i));
