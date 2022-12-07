@@ -13,11 +13,11 @@ import java.util.*;
 public class Game {
 
 
-    private GameState gameState;
-    private DrawingAndTrashPile drawingAndTrashPile;
+    private final GameState gameState;
+    private final DrawingAndTrashPile drawingAndTrashPile;
     private ArrayList<Player> players;
-    private SleepingQueens sleepingQueens;
-    private GameFinished gameFinished;
+    private final SleepingQueens sleepingQueens;
+    private final GameFinished gameFinished;
 
 
     public Game(int numberOfPlayers){
