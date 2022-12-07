@@ -8,14 +8,16 @@ import java.util.*;
 
 public class Hand {
 
-    private Player player;
+    private DrawingAndTrashPile drawingAndTrashPile;
     private List<Card> cards;
     private List<Card> pickedCards;
+    private final int playerId;
 
 
-    public Hand(Player player){
-        this.player = player;
-        cards = player.getGame().getDrawingAndTrashPile().draw5();
+    public Hand(DrawingAndTrashPile drawingAndTrashPile, int playerId){
+        this.playerId = playerId;
+        this.drawingAndTrashPile = drawingAndTrashPile;
+        cards = drawingAndTrashPile.draw5();
     }
 
 
@@ -35,9 +37,9 @@ public class Hand {
 
 
         Map<HandPosition, Card> ret = new HashMap<>();
-        List<Card> drawnCards = player.getGame().getDrawingAndTrashPile().discardAndDraw(pickedCards);
+        List<Card> drawnCards = drawingAndTrashPile.discardAndDraw(pickedCards);
         for (int i = 0; i < drawnCards.size(); i++) {
-            ret.put(new HandPosition(i + cards.size() , player.getPlayerId()), drawnCards.get(i));
+            ret.put(new HandPosition(i + cards.size() , playerId), drawnCards.get(i));
         }
         cards.addAll(drawnCards);
 
@@ -52,7 +54,7 @@ public class Hand {
     public HandPosition hasCardOfType(CardType type){
         for(int i = 0; i < cards.size(); i++){
             if(cards.get(i).getType() == type){
-                return new HandPosition(i,player.getPlayerId());
+                return new HandPosition(i,playerId);
             }
         }
         return null;

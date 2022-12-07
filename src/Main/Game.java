@@ -28,6 +28,21 @@ public class Game {
 
 
 
+        for (int i = 0; i < numberOfPlayers; i++){
+            Hand hand = new Hand(drawingAndTrashPile,i);
+            players.add(new Player(i, hand));
+        }
+
+        MoveQueen moveQueen = new MoveQueen(players);
+        EvaluateAttack evaluateAttack = new EvaluateAttack(players,moveQueen);
+
+
+        for (int i = 0; i< numberOfPlayers; i++){
+            players.get(i).setEvaluateAttack(evaluateAttack);
+            players.get(i).setMoveQueen(moveQueen);
+            players.get(i).setSleepingQueens(sleepingQueens);
+        }
+
         gameState.numberOfPlayers = numberOfPlayers;
         gameState.onTurn = (int)(Math.random()*(gameState.numberOfPlayers-1) );
         gameState.cardsDiscartedLastTurn = new ArrayList<>();

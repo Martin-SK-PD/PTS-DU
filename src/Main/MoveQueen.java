@@ -5,15 +5,19 @@ import DataType.Position.Position;
 import DataType.Position.SleepingQueenPosition;
 import DataType.Queen;
 
+import java.util.List;
 import java.util.Optional;
 
 public class MoveQueen {
 
-    private Player player;
+    private List<Player> players;
     private QueenCollection queenCollection;
 
-    public MoveQueen(Player player, QueenCollection queenCollection){
-        this.player = player;
+    public MoveQueen(List<Player> players){
+        this.players = players;
+    }
+
+    public void setQueenCollection(QueenCollection queenCollection) {
         this.queenCollection = queenCollection;
     }
 
@@ -22,14 +26,16 @@ public class MoveQueen {
         if(targetQueen instanceof AwokenQueenPosition){
 
             int target = ((AwokenQueenPosition) targetQueen).getPlayerIndex();
-            Optional<Queen> queen = player.getGame().getPlayers().get(target).getAwokenQueens().removeQueen(targetQueen);
+
+            Optional<Queen> queen = players.get(target).getAwokenQueens().removeQueen(targetQueen);
             if(queen.isPresent()){
                 queenCollection.addQueen(queen.get());
             }
             return false;
         }
         else if(targetQueen instanceof SleepingQueenPosition) {
-            Optional<Queen> queen = player.getGame().getSleepingQueens().removeQueen(targetQueen);
+
+            Optional<Queen> queen = queenCollection.removeQueen(targetQueen);
             if (queen.isPresent()) {
                 queenCollection.addQueen(queen.get());
                 return true;

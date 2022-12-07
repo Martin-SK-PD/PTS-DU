@@ -10,36 +10,43 @@ import java.util.List;
 public class EvaluateAttack {
 
     private CardType defenseCardType;
-    private Player player;
     private QueenCollection queenCollection;
+    private List<Player> players;
+    private MoveQueen moveQueen;
 
-    public EvaluateAttack(CardType defenseCardType, Player player, QueenCollection queenCollection){
-        this.player = player;
-        this.defenseCardType = defenseCardType;
+    public EvaluateAttack( List<Player> players, MoveQueen moveQueen){
+        this.players = players;
+        this.moveQueen = moveQueen;
+    }
+
+    public void setQueenCollection(QueenCollection queenCollection) {
         this.queenCollection = queenCollection;
+    }
 
+    public void setDefenseCardType(CardType defenseCardType) {
+        this.defenseCardType = defenseCardType;
     }
 
     public boolean play(Position targetQueen, int targetPlayerIdx){
 
-        if( player.getGame().getPlayers().size() <= targetPlayerIdx ){
+        if( players.size() <= targetPlayerIdx ){
             return false;
         }
-        if(!player.getGame().getPlayers().get(targetPlayerIdx).getAwokenQueens().getQueens().containsKey(targetQueen)){
+        if(!players.get(targetPlayerIdx).getAwokenQueens().getQueens().containsKey(targetQueen)){
             return false;
         }
 
-        HandPosition defence = player.getGame().getPlayers().get(targetPlayerIdx).getHand().hasCardOfType(defenseCardType);
+        HandPosition defence = players.get(targetPlayerIdx).getHand().hasCardOfType(defenseCardType);
 
         if(defence == null){
-            MoveQueen moveQueen = new MoveQueen(player, queenCollection);
+            moveQueen.setQueenCollection(queenCollection);
             moveQueen.play(targetQueen);
         }
         else {
             List<HandPosition> list = new ArrayList<>();
             list.add(defence);
-            player.getGame().getPlayers().get(targetPlayerIdx).getHand().pickCards(list);
-            player.getGame().getPlayers().get(targetPlayerIdx).getHand().removePickedCardsAndRedraw();
+            players.get(targetPlayerIdx).getHand().pickCards(list);
+            players.get(targetPlayerIdx).getHand().removePickedCardsAndRedraw();
         }
 
         return false;

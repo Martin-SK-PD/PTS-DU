@@ -12,24 +12,36 @@ public class Player {
 
     private final int playerId;
     private PlayerState playerState;
-    private Game game;
     private Hand hand;
     private AwokenQueens awokenQueens;
+    private EvaluateAttack evaluateAttack;
+    private MoveQueen moveQueen;
+    private SleepingQueens sleepingQueens;
 
-    public Player(int playerId, Game game){
+    public Player(int playerId, Hand hand){
         this.playerId = playerId;
-        this.game = game;
+        this.hand = hand;
+
 
         playerState = new PlayerState();
         awokenQueens = new AwokenQueens(playerId);
-        hand = new Hand(this);
+
         playerState = new PlayerState();
         uptadePlayerState();
 
     }
 
+    public void setEvaluateAttack(EvaluateAttack evaluateAttack) {
+        this.evaluateAttack = evaluateAttack;
+    }
 
+    public void setMoveQueen(MoveQueen moveQueen) {
+        this.moveQueen = moveQueen;
+    }
 
+    public void setSleepingQueens(SleepingQueens sleepingQueens) {
+        this.sleepingQueens = sleepingQueens;
+    }
 
     public boolean play(List<Position> cards){
 
@@ -66,7 +78,7 @@ public class Player {
                     Position targetQueen = cards.get(1);
                     if(targetQueen instanceof SleepingQueenPosition) {
 
-                        MoveQueen moveQueen = new MoveQueen(this, awokenQueens);
+                        moveQueen.setQueenCollection(awokenQueens);
                         if (!moveQueen.play(targetQueen)) {
                             return false;
                         }
@@ -84,7 +96,7 @@ public class Player {
                     Position targetQueen1 = cards.get(1);
                     if (targetQueen1 instanceof AwokenQueenPosition) {
 
-                        EvaluateAttack evaluateAttack = new EvaluateAttack(CardType.Dragon, this, awokenQueens);
+                        evaluateAttack.setDefenseCardType(CardType.Dragon);
 
                         if (!evaluateAttack.play(targetQueen1,  ((AwokenQueenPosition) targetQueen1).getPlayerIndex()  )) {
                             return false;
@@ -102,8 +114,10 @@ public class Player {
                 case SleepingPotion:
                     Position targetQueen2 = cards.get(1);
                     if(targetQueen2 instanceof AwokenQueenPosition){
-                        EvaluateAttack evaluateAttack =
-                        new EvaluateAttack(CardType.MagicWand,this,game.getSleepingQueens());
+
+                        evaluateAttack.setDefenseCardType(CardType.MagicWand);
+                        evaluateAttack.setQueenCollection(sleepingQueens);
+
                         if(!evaluateAttack.play(targetQueen2,((AwokenQueenPosition) targetQueen2).getPlayerIndex())){
                             return false;
                         }
@@ -217,9 +231,6 @@ public class Player {
         playerState.awokenQueens = queens;
     }
 
-    public Game getGame() {
-        return game;
-    }
 
     public int getPlayerId() {
         return playerId;
