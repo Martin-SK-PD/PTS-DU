@@ -30,8 +30,10 @@ public class MoveQueen {
             Optional<Queen> queen = players.get(target).getAwokenQueens().removeQueen(targetQueen);
             if(queen.isPresent()){
                 queenCollection.addQueen(queen.get());
+                return true;
+            }else {
+                return false;
             }
-            return false;
         }
         else if(targetQueen instanceof SleepingQueenPosition) {
 

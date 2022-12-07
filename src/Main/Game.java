@@ -87,6 +87,10 @@ public class Game {
         return sleepingQueens;
     }
 
+    public GameState getGameState() {
+        return gameState;
+    }
+
     private void update(){
 
         Set<SleepingQueenPosition> sleepingQueenPositions = new HashSet<>();

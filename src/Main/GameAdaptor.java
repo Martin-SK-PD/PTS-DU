@@ -74,8 +74,9 @@ public class GameAdaptor implements GamePlayerInterface{
 
         }
 
-
-        return game.play(index,card).toString();
+        String s = game.play(index,card).toString();
+        gameObservable.notifyAll(game.getGameState());
+        return s;
     }
 
 }
