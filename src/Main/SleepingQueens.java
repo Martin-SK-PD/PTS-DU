@@ -40,12 +40,14 @@ public class SleepingQueens extends QueenCollection{
 
     @Override
     public void addQueen(Queen queen){
-        if(emptySpaces.isEmpty()){
-            sleepingQueens.put(new SleepingQueenPosition(sleepingQueens.size()),queen);
-        }
-        else {
-            sleepingQueens.put(new SleepingQueenPosition(emptySpaces.get(0) ),queen );
-            emptySpaces.remove(0);
+        if(sleepingQueens.size()<12) {
+
+            if (emptySpaces.isEmpty()) {
+                sleepingQueens.put(new SleepingQueenPosition(sleepingQueens.size()), queen);
+            } else {
+                sleepingQueens.put(new SleepingQueenPosition(emptySpaces.get(0)), queen);
+                emptySpaces.remove(0);
+            }
         }
 
     }
