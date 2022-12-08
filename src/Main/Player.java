@@ -79,6 +79,7 @@ public class Player {
                     if(targetQueen instanceof SleepingQueenPosition) {
 
                         moveQueen.setQueenCollection(awokenQueens);
+                        moveQueen.setPlayerOnTurn(playerId);
                         if (!moveQueen.play(targetQueen)) {
                             return false;
                         }
@@ -97,7 +98,8 @@ public class Player {
                     if (targetQueen1 instanceof AwokenQueenPosition) {
 
                         evaluateAttack.setDefenseCardType(CardType.Dragon);
-
+                        evaluateAttack.setQueenCollection(awokenQueens);
+                        evaluateAttack.setPlayerOnTurn(playerId);
                         if (!evaluateAttack.play(targetQueen1,  ((AwokenQueenPosition) targetQueen1).getPlayerIndex()  )) {
                             return false;
                         }
@@ -117,6 +119,7 @@ public class Player {
 
                         evaluateAttack.setDefenseCardType(CardType.MagicWand);
                         evaluateAttack.setQueenCollection(sleepingQueens);
+                        evaluateAttack.setPlayerOnTurn(playerId);
 
                         if(!evaluateAttack.play(targetQueen2,((AwokenQueenPosition) targetQueen2).getPlayerIndex())){
                             return false;

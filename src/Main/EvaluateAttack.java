@@ -13,6 +13,7 @@ public class EvaluateAttack {
     private QueenCollection queenCollection;
     private List<Player> players;
     private MoveQueen moveQueen;
+    private int playerOnTurn;
 
     public EvaluateAttack( List<Player> players, MoveQueen moveQueen){
         this.players = players;
@@ -21,6 +22,10 @@ public class EvaluateAttack {
 
     public void setQueenCollection(QueenCollection queenCollection) {
         this.queenCollection = queenCollection;
+    }
+
+    public void setPlayerOnTurn(int playerOnTurn) {
+        this.playerOnTurn = playerOnTurn;
     }
 
     public void setDefenseCardType(CardType defenseCardType) {
@@ -40,6 +45,7 @@ public class EvaluateAttack {
 
         if(defence == null){
             moveQueen.setQueenCollection(queenCollection);
+            moveQueen.setPlayerOnTurn(playerOnTurn);
             moveQueen.play(targetQueen);
         }
         else {
