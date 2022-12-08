@@ -1,13 +1,11 @@
 package Main;
 
-import DataType.Position.AwokenQueenPosition;
+
 import DataType.Position.SleepingQueenPosition;
 import DataType.Queen;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -50,7 +48,7 @@ public class GameFinishedTest {
 
         }
 
-        assertTrue(gameFinished.isFinished().isPresent());
+        assertEquals(1, (int) gameFinished.isFinished().get());
     }
 
 }

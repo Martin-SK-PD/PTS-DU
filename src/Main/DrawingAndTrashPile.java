@@ -57,7 +57,7 @@ public class DrawingAndTrashPile {
     public List<Card> discardAndDraw(List<Card> discard){
 
         List<Card> ret = new ArrayList<>();
-        discardedThisTurn = discard;
+        discardedThisTurn.addAll(discard);
         int count = discard.size();
 
 
@@ -105,4 +105,8 @@ public class DrawingAndTrashPile {
     }
 
 
+    //for testing
+    public EmptyDeckHandler getEmptyDeckHandler() {
+        return emptyDeckHandler;
+    }
 }
