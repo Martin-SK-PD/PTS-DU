@@ -210,7 +210,6 @@ public class Player {
         List<Card> handCards = hand.getCards();
         for (int i = 0; i < 5; i++) {
                 cards.put(i, Optional.of(handCards.get(i)));
-                cards.put(i, Optional.empty());
         }
         playerState.setCards(cards);
 
