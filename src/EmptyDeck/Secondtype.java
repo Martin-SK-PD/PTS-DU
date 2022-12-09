@@ -12,7 +12,7 @@ public class Secondtype implements  EmptyDeckHandler{
     private List<Card> thisTrashPile;
 
     public Secondtype(){
-        thisTrashPile = new ArrayList<>();
+        thisDrawingPile = new ArrayList<>();
         thisTrashPile = new ArrayList<>();
     }
 

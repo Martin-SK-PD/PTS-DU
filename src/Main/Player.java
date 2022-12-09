@@ -14,13 +14,17 @@ public class Player {
     private PlayerState playerState;
     private Hand hand;
     private AwokenQueens awokenQueens;
-    private EvaluateAttack evaluateAttack;
-    private MoveQueen moveQueen;
     private SleepingQueens sleepingQueens;
 
-    public Player(int playerId, Hand hand){
+
+
+    private EvaluateAttack evaluateAttack;
+    private MoveQueen moveQueen;
+
+    public Player(int playerId, Hand hand, SleepingQueens sleepingQueens){
         this.playerId = playerId;
         this.hand = hand;
+        this.sleepingQueens = sleepingQueens;
 
 
         playerState = new PlayerState();
@@ -39,9 +43,8 @@ public class Player {
         this.moveQueen = moveQueen;
     }
 
-    public void setSleepingQueens(SleepingQueens sleepingQueens) {
-        this.sleepingQueens = sleepingQueens;
-    }
+
+
 
     public boolean play(List<Position> cards){
 
@@ -75,11 +78,11 @@ public class Player {
             switch(firstCard.get().getType()) {
 
                 case King:
+
                     Position targetQueen = cards.get(1);
                     if(targetQueen instanceof SleepingQueenPosition) {
 
                         moveQueen.setQueenCollection(awokenQueens);
-                        moveQueen.setPlayerOnTurn(playerId);
                         if (!moveQueen.play(targetQueen)) {
                             return false;
                         }
@@ -88,7 +91,6 @@ public class Player {
                     else {
                         return false;
                     }
-
 
                     break;
 
@@ -99,7 +101,6 @@ public class Player {
 
                         evaluateAttack.setDefenseCardType(CardType.Dragon);
                         evaluateAttack.setQueenCollection(awokenQueens);
-                        evaluateAttack.setPlayerOnTurn(playerId);
                         if (!evaluateAttack.play(targetQueen1,  ((AwokenQueenPosition) targetQueen1).getPlayerIndex()  )) {
                             return false;
                         }
@@ -119,7 +120,6 @@ public class Player {
 
                         evaluateAttack.setDefenseCardType(CardType.MagicWand);
                         evaluateAttack.setQueenCollection(sleepingQueens);
-                        evaluateAttack.setPlayerOnTurn(playerId);
 
                         if(!evaluateAttack.play(targetQueen2,((AwokenQueenPosition) targetQueen2).getPlayerIndex())){
                             return false;

@@ -2,9 +2,6 @@ package Main;
 
 import DataType.Card;
 import DataType.CardType;
-import EmptyDeck.EmptyDeckHandler;
-import EmptyDeck.FirstType;
-import EmptyDeck.Secondtype;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -53,16 +50,6 @@ public class DrawingAndTrashPileTest {
     }
 
 
-    @Test
-    public void setEmptyDeckHandler() {
-        EmptyDeckHandler emptyDeckHandler = new FirstType();
-        drawingAndTrashPile.setEmptyDeckHandler(emptyDeckHandler);
-        assertTrue(drawingAndTrashPile.getEmptyDeckHandler() instanceof FirstType);
-
-        emptyDeckHandler = new Secondtype();
-        drawingAndTrashPile.setEmptyDeckHandler(emptyDeckHandler);
-        assertTrue(drawingAndTrashPile.getEmptyDeckHandler() instanceof Secondtype);
-    }
 
     @Test
     public void draw5() {

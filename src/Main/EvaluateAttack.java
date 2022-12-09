@@ -13,9 +13,8 @@ public class EvaluateAttack {
     private QueenCollection queenCollection;
     private List<Player> players;
     private MoveQueen moveQueen;
-    private int playerOnTurn;
 
-    public EvaluateAttack( List<Player> players, MoveQueen moveQueen){
+    public EvaluateAttack( List<Player> players, MoveQueen moveQueen ){
         this.players = players;
         this.moveQueen = moveQueen;
     }
@@ -24,9 +23,7 @@ public class EvaluateAttack {
         this.queenCollection = queenCollection;
     }
 
-    public void setPlayerOnTurn(int playerOnTurn) {
-        this.playerOnTurn = playerOnTurn;
-    }
+
 
     public void setDefenseCardType(CardType defenseCardType) {
         this.defenseCardType = defenseCardType;
@@ -37,7 +34,16 @@ public class EvaluateAttack {
         if( players.size() <= targetPlayerIdx ){
             return false;
         }
-        if(!players.get(targetPlayerIdx).getAwokenQueens().getQueens().containsKey(targetQueen)){
+
+        boolean containsTargetQueenPosition = false;
+        for(Position position : players.get(targetPlayerIdx).getAwokenQueens().getQueens().keySet()){
+            if(position.getCardIndex() == targetQueen.getCardIndex()){
+                containsTargetQueenPosition = true;
+                break;
+            }
+        }
+
+        if(!containsTargetQueenPosition){
             return false;
         }
 
@@ -45,7 +51,6 @@ public class EvaluateAttack {
 
         if(defence == null){
             moveQueen.setQueenCollection(queenCollection);
-            moveQueen.setPlayerOnTurn(playerOnTurn);
             moveQueen.play(targetQueen);
         }
         else {

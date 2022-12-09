@@ -12,7 +12,7 @@ public class FirstType implements EmptyDeckHandler{
     private List<Card> thisTrashPile;
 
     public FirstType(){
-        thisTrashPile = new ArrayList<>();
+        thisDrawingPile = new ArrayList<>();
         thisTrashPile = new ArrayList<>();
     }
 

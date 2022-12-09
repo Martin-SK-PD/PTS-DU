@@ -104,9 +104,4 @@ public class DrawingAndTrashPile {
         return cards;
     }
 
-
-    //for testing
-    public EmptyDeckHandler getEmptyDeckHandler() {
-        return emptyDeckHandler;
-    }
 }

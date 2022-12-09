@@ -12,18 +12,15 @@ public class MoveQueen {
 
     private List<Player> players;
     private QueenCollection queenCollection;
-    private int playerOnTurn;
+    private SleepingQueens sleepingQueens;
 
-    public MoveQueen(List<Player> players){
+    public MoveQueen(List<Player> players,SleepingQueens sleepingQueens){
         this.players = players;
+        this.sleepingQueens = sleepingQueens;
     }
 
     public void setQueenCollection(QueenCollection queenCollection) {
         this.queenCollection = queenCollection;
-    }
-
-    public void setPlayerOnTurn(int playerOnTurn) {
-        this.playerOnTurn = playerOnTurn;
     }
 
     boolean play(Position targetQueen){
@@ -31,9 +28,6 @@ public class MoveQueen {
         if(targetQueen instanceof AwokenQueenPosition){
 
             int target = ((AwokenQueenPosition) targetQueen).getPlayerIndex();
-            if(players.size() < target){
-                return false;
-            }
 
             Optional<Queen> queen = players.get(target).getAwokenQueens().removeQueen(targetQueen);
             if(queen.isPresent()){
@@ -45,9 +39,9 @@ public class MoveQueen {
         }
         else if(targetQueen instanceof SleepingQueenPosition) {
 
-            Optional<Queen> queen = queenCollection.removeQueen(targetQueen);
+            Optional<Queen> queen = sleepingQueens.removeQueen(targetQueen);
             if (queen.isPresent()) {
-                players.get(playerOnTurn).getAwokenQueens().addQueen(queen.get());
+                queenCollection.addQueen(queen.get());
                 return true;
             }
             return false;

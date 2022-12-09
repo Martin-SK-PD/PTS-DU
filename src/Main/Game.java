@@ -30,17 +30,16 @@ public class Game {
 
         for (int i = 0; i < numberOfPlayers; i++){
             Hand hand = new Hand(drawingAndTrashPile,i);
-            players.add(new Player(i, hand));
+            players.add(new Player(i, hand, sleepingQueens));
         }
 
-        MoveQueen moveQueen = new MoveQueen(players);
+        MoveQueen moveQueen = new MoveQueen(players,sleepingQueens);
         EvaluateAttack evaluateAttack = new EvaluateAttack(players,moveQueen);
 
 
         for (int i = 0; i< numberOfPlayers; i++){
             players.get(i).setEvaluateAttack(evaluateAttack);
             players.get(i).setMoveQueen(moveQueen);
-            players.get(i).setSleepingQueens(sleepingQueens);
         }
 
         gameState.numberOfPlayers = numberOfPlayers;
