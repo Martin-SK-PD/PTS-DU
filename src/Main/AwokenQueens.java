@@ -2,7 +2,6 @@ package Main;
 
 import DataType.Position.AwokenQueenPosition;
 import DataType.Position.Position;
-import DataType.Position.SleepingQueenPosition;
 import DataType.Queen;
 
 import java.util.*;
@@ -35,17 +34,25 @@ public class AwokenQueens extends QueenCollection{
     @Override
     public Optional<Queen> removeQueen(Position position){
 
-        Optional<Queen> queen = Optional.empty();
-        for (Position position1 : awokenQueens.keySet()){
-            if(position.getCardIndex() == position1.getCardIndex()){
-                queen = Optional.ofNullable(awokenQueens.remove(position1));
-                break;
+        if(position instanceof  AwokenQueenPosition) {
+
+            if(((AwokenQueenPosition) position).getPlayerIndex() != playerIdx){
+                return Optional.empty();
             }
+
+            Optional<Queen> queen = Optional.empty();
+            for (Position position1 : awokenQueens.keySet()) {
+                if (position.getCardIndex() == position1.getCardIndex()) {
+                    queen = Optional.ofNullable(awokenQueens.remove(position1));
+                    break;
+                }
+            }
+            if (queen.isPresent()) {
+                emptySpaces.add(position.getCardIndex());
+            }
+            return queen;
         }
-        if(queen.isPresent()){
-            emptySpaces.add(position.getCardIndex());
-        }
-        return queen;
+        return Optional.empty();
     }
 
 
