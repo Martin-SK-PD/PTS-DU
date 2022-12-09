@@ -43,7 +43,7 @@ public class Game {
         }
 
         gameState.numberOfPlayers = numberOfPlayers;
-        gameState.onTurn = (int)(Math.random()*(gameState.numberOfPlayers-1) );
+        gameState.onTurn = 0;
         gameState.cardsDiscartedLastTurn = new ArrayList<>();
 
         update();

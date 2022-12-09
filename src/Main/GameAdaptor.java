@@ -15,9 +15,10 @@ public class GameAdaptor implements GamePlayerInterface{
     private GameObservable gameObservable;
     private Map<String, Integer> players ;
 
-    private GameAdaptor(GameObservable gameObservable){
+    public GameAdaptor(GameObservable gameObservable){
 
         this.gameObservable = gameObservable;
+        players = new LinkedHashMap<>();
         for(int i = 0; i < gameObservable.getPlayersName().size(); i++){
             players.put( gameObservable.getPlayersName().get(i) , i);
         }
