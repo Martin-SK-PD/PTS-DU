@@ -1,14 +1,12 @@
 package Main;
 
+import DataType.GameState;
 import DataType.Position.AwokenQueenPosition;
 import DataType.Position.HandPosition;
 import DataType.Position.Position;
 import DataType.Position.SleepingQueenPosition;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameAdaptor implements GamePlayerInterface{
 
@@ -74,9 +72,14 @@ public class GameAdaptor implements GamePlayerInterface{
 
         }
 
-        String s = game.play(index,card).toString();
-        gameObservable.notifyAll(game.getGameState());
-        return s;
+        Optional<GameState> gameState = game.play(index,card);
+
+        if(gameState.isPresent()){
+            gameObservable.notifyAll(gameState.get());
+            return gameState.get().toString();
+        }
+
+        return "";
     }
 
 }

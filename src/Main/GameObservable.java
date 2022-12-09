@@ -16,7 +16,9 @@ public class GameObservable {
     }
 
     public void add(GameObserver observer){
-        gameObservers.add(observer);
+        if(!gameObservers.contains(observer)) {
+            gameObservers.add(observer);
+        }
     }
 
 
@@ -52,4 +54,13 @@ public class GameObservable {
     public List<String> getPlayersName() {
         return playersName;
     }
+
+
+    //for testing
+
+    public List<GameObserver> getGameObservers() {
+        return gameObservers;
+    }
+
+
 }
