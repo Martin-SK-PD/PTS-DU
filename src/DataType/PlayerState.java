@@ -3,6 +3,7 @@ package DataType;
 import Main.Player;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,8 +13,8 @@ public class PlayerState {
     public Map<Integer, Queen> awokenQueens;
 
     public PlayerState(){
-      awokenQueens = new HashMap<>();
-      cards = new HashMap<>();
+      awokenQueens = new LinkedHashMap<>();
+      cards = new LinkedHashMap<>();
     }
 
     public Map<Integer, Optional<Card>> getCards() {

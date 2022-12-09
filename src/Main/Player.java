@@ -13,10 +13,9 @@ public class Player {
     private final int playerId;
     private PlayerState playerState;
     private Hand hand;
+
     private AwokenQueens awokenQueens;
     private SleepingQueens sleepingQueens;
-
-
 
     private EvaluateAttack evaluateAttack;
     private MoveQueen moveQueen;
@@ -52,106 +51,92 @@ public class Player {
         if (cards.isEmpty()) {
             return false;
         }
+
+
+
         if (!(cards.get(0) instanceof HandPosition)) {
             //first card has to be in hand
             return false;
         }
-
+        if(((HandPosition) cards.get(0)).getPlayerIndex()!= playerId){
+            //it must be players on turn card
+            return false;
+        }
 
         List<HandPosition> listOfHandPos = new ArrayList<>();
 
 
         //if size is == 1, it has to be numberCard
         if (cards.size() == 1) {
+
             listOfHandPos.add((HandPosition) cards.get(0));
         }
-
+        else
         if (cards.size() == 2) {
 
-            Optional<Card> firstCard = playerState.getCards().get(cards.get(0).getCardIndex());
+            Card firstCard = hand.getCards().get(cards.get(0).getCardIndex());
 
-            if (firstCard.isEmpty()) {
-                //player don't own this card
-                return false;
-            }
 
-            switch(firstCard.get().getType()) {
-
-                case King:
-
+            switch (firstCard.getType()) {
+                case King -> {
                     Position targetQueen = cards.get(1);
-                    if(targetQueen instanceof SleepingQueenPosition) {
+                    if (targetQueen instanceof SleepingQueenPosition) {
 
                         moveQueen.setQueenCollection(awokenQueens);
                         if (!moveQueen.play(targetQueen)) {
                             return false;
                         }
                         listOfHandPos.add((HandPosition) cards.get(0));
-                    }
-                    else {
+                    } else {
                         return false;
                     }
-
-                    break;
-
-
-                case Knight:
+                }
+                case Knight -> {
                     Position targetQueen1 = cards.get(1);
                     if (targetQueen1 instanceof AwokenQueenPosition) {
 
                         evaluateAttack.setDefenseCardType(CardType.Dragon);
                         evaluateAttack.setQueenCollection(awokenQueens);
-                        if (!evaluateAttack.play(targetQueen1,  ((AwokenQueenPosition) targetQueen1).getPlayerIndex()  )) {
+                        if (!evaluateAttack.play(targetQueen1, ((AwokenQueenPosition) targetQueen1).getPlayerIndex())) {
                             return false;
                         }
                         listOfHandPos.add((HandPosition) cards.get(0));
-                    }
-                    else{
+                    } else {
                         return false;
                     }
-                    break;
-
-
-
-
-                case SleepingPotion:
+                }
+                case SleepingPotion -> {
                     Position targetQueen2 = cards.get(1);
-                    if(targetQueen2 instanceof AwokenQueenPosition){
+                    if (targetQueen2 instanceof AwokenQueenPosition) {
 
                         evaluateAttack.setDefenseCardType(CardType.MagicWand);
                         evaluateAttack.setQueenCollection(sleepingQueens);
 
-                        if(!evaluateAttack.play(targetQueen2,((AwokenQueenPosition) targetQueen2).getPlayerIndex())){
+                        if (!evaluateAttack.play(targetQueen2, ((AwokenQueenPosition) targetQueen2).getPlayerIndex())) {
                             return false;
                         }
                         listOfHandPos.add((HandPosition) cards.get(0));
-                    }
-                    else {
+                    } else {
                         return false;
                     }
-                    break;
-
-
-                default:
-
+                }
+                default -> {
                     if (!(cards.get(1) instanceof HandPosition)) {
                         //wrong type of card
                         return false;
                     }
 
-
-                    Optional<Card> secondCard = playerState.getCards().get( cards.get(1).getCardIndex() );
+                    Optional<Card> secondCard = playerState.getCards().get(cards.get(1).getCardIndex());
                     if (secondCard.isEmpty()) {
                         return false;
                     }
-                    if (firstCard.get().getType() != CardType.Number || secondCard.get().getType() != CardType.Number) {
+                    if (firstCard.getType() != CardType.Number || secondCard.get().getType() != CardType.Number) {
                         //wrong card
                         return false;
-                    }
-                    else {
+                    } else {
                         EvaluateNumberedCards evaluateNumberedCards = new EvaluateNumberedCards();
                         List<Card> list = new ArrayList<>();
-                        list.add(firstCard.get());
+                        list.add(firstCard);
                         list.add(secondCard.get());
                         if (!evaluateNumberedCards.play(list)) {
                             return false;
@@ -159,9 +144,9 @@ public class Player {
                         listOfHandPos.add((HandPosition) cards.get(0));
                         listOfHandPos.add((HandPosition) cards.get(1));
                     }
+                }
             }
         }
-
         else {
             ArrayList<Card> numberCards = new ArrayList<>();
             ArrayList<Integer> cardPositions = new ArrayList<>();
@@ -217,12 +202,8 @@ public class Player {
 
         List<Card> handCards = hand.getCards();
         for (int i = 0; i < 5; i++) {
-            if (i < handCards.size()) {
                 cards.put(i, Optional.of(handCards.get(i)));
-            }
-            else {
                 cards.put(i, Optional.empty());
-            }
         }
         playerState.setCards(cards);
 
