@@ -44,14 +44,11 @@ public class Player {
 
 
 
-
     public boolean play(List<Position> cards){
-
 
         if (cards.isEmpty()) {
             return false;
         }
-
 
 
         if (!(cards.get(0) instanceof HandPosition)) {
@@ -69,10 +66,15 @@ public class Player {
         //if size is == 1, it has to be numberCard
         if (cards.size() == 1) {
 
+            if(hand.getCards().get(cards.get(0).getCardIndex()).getType() != CardType.Number ){
+                return false;
+            }
+
             listOfHandPos.add((HandPosition) cards.get(0));
         }
         else
         if (cards.size() == 2) {
+
 
             Card firstCard = hand.getCards().get(cards.get(0).getCardIndex());
 
@@ -95,6 +97,10 @@ public class Player {
                     Position targetQueen1 = cards.get(1);
                     if (targetQueen1 instanceof AwokenQueenPosition) {
 
+                        if(((AwokenQueenPosition) targetQueen1).getPlayerIndex() == playerId){
+                            return false;
+                        }
+
                         evaluateAttack.setDefenseCardType(CardType.Dragon);
                         evaluateAttack.setQueenCollection(awokenQueens);
                         if (!evaluateAttack.play(targetQueen1, ((AwokenQueenPosition) targetQueen1).getPlayerIndex())) {
@@ -108,6 +114,10 @@ public class Player {
                 case SleepingPotion -> {
                     Position targetQueen2 = cards.get(1);
                     if (targetQueen2 instanceof AwokenQueenPosition) {
+
+                        if(((AwokenQueenPosition) targetQueen2).getPlayerIndex() == playerId){
+                            return false;
+                        }
 
                         evaluateAttack.setDefenseCardType(CardType.MagicWand);
                         evaluateAttack.setQueenCollection(sleepingQueens);
@@ -126,18 +136,17 @@ public class Player {
                         return false;
                     }
 
-                    Optional<Card> secondCard = playerState.getCards().get(cards.get(1).getCardIndex());
-                    if (secondCard.isEmpty()) {
-                        return false;
-                    }
-                    if (firstCard.getType() != CardType.Number || secondCard.get().getType() != CardType.Number) {
+                    Card secondCard = hand.getCards().get(cards.get(1).getCardIndex());
+
+                    if (firstCard.getType() != CardType.Number || secondCard.getType() != CardType.Number) {
                         //wrong card
                         return false;
+
                     } else {
                         EvaluateNumberedCards evaluateNumberedCards = new EvaluateNumberedCards();
                         List<Card> list = new ArrayList<>();
                         list.add(firstCard);
-                        list.add(secondCard.get());
+                        list.add(secondCard);
                         if (!evaluateNumberedCards.play(list)) {
                             return false;
                         }
@@ -154,24 +163,22 @@ public class Player {
 
             for (Position position : cards) {
 
-                if (!(position instanceof HandPosition)) {
-                    //wrong types of cards
+                if (!(position instanceof HandPosition)  || ((HandPosition) position).getPlayerIndex()!= playerId) {
+                    //wrong types of cards or not your card
                     return false;
                 }
 
 
-                Optional<Card> card = playerState.getCards().get(cards.get(0).getCardIndex());
-                if (card.isEmpty()) {
-                    return false;
-                }
+                Card card = hand.getCards().get(cards.get(0).getCardIndex());
+
 
                 if(!cardPositions.contains(position.getCardIndex())) {
                     cardPositions.add(position.getCardIndex());
 
-                    if(card.get().getType() != CardType.Number){
+                    if(card.getType() != CardType.Number){
                         return false;
                     }
-                    numberCards.add(card.get());
+                    numberCards.add(card);
                     listOfHandPos.add((HandPosition) position);
                 }
             }
